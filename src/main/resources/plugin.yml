@@ -1,0 +1,6 @@
+name: Haven Atm
+version: ${project.version}
+main: fr.hephaisto.havenatm.HavenAtm
+api-version: 1.14
+authors: [Hephaisto]
+description: Plugin d'ATM pour haven 
