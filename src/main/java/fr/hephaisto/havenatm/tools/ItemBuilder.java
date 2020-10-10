@@ -32,7 +32,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder clone() {
-        return new fr.hephaisto.plugintest3.tools.ItemBuilder(is);
+        return new ItemBuilder(is);
     }
 
     public ItemBuilder setDurability(short dur) {

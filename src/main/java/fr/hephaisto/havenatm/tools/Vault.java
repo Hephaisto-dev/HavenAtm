@@ -33,6 +33,10 @@ public class Vault {
         getEconomy().bankWithdraw(p.getName(), amount);
     }
 
+    public static void deposit(Player p, double amount) {
+        getEconomy().bankDeposit(p.getName(), amount);
+    }
+
     public Economy getEcon() {
         return econ;
     }
