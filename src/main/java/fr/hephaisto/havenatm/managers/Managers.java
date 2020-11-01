@@ -71,19 +71,15 @@ public class Managers {
         return (economy != null);
     }
 
-    public Economy getEcon() {
-        return economy;
-    }
-
     public void takemoney (Player player, int amount,Material material){
         if (setupEconomy()) {
             if (economy.getBalance(player)>amount) {
                 player.getInventory().addItem(new ItemStack(material));
                 economy.withdrawPlayer(player, amount);
-                player.sendMessage("Tu as maintenant " + economy.getBalance(player));
+                player.sendMessage("§e§l[HavenBank]§l§e §2Transfert effectué");
             }
             else{
-                player.sendMessage("Vous n'avez pas assez pour effectuer cette transaction");
+                player.sendMessage("§e§l[HavenBank]§l§e §4Vous n'avez pas assez pour effectuer cette transaction");
             }
         }
     }
@@ -93,9 +89,9 @@ public class Managers {
             if (player.getInventory().contains(material)) {
                 player.getInventory().removeItem(new ItemStack(material));
                 economy.depositPlayer(player, amount);
-                player.sendMessage("Tu as maintenant " + economy.getBalance(player));
+                player.sendMessage("§e§l[HavenBank]§l§e §2Transfert effectué");
             } else {
-                player.sendMessage("Vous n'avez pas assez pour effectuer cette transaction");
+                player.sendMessage("§e§l[HavenBank]§l§e §4Vous n'avez pas assez pour effectuer cette transaction");
             }
         }
     }
