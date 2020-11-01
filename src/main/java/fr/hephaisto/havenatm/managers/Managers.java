@@ -75,22 +75,12 @@ public class Managers {
         return economy;
     }
 
-    public void takemoney (Player player, int amount){
+    public void takemoney (Player player, int amount,Material material){
         if (setupEconomy()) {
             if (economy.getBalance(player)>amount) {
-                if (checkHasStackFree(player,amount)) {
-                    if (amount == 100) {
-                        player.getInventory().addItem(new ItemStack(Material.DIRT, 64));
-                        player.getInventory().addItem(new ItemStack(Material.DIRT, 36));
-                    } else {
-                        player.getInventory().addItem(new ItemStack(Material.DIRT, amount));
-                    }
-                    economy.withdrawPlayer(player, amount);
-                    player.sendMessage("Tu as maintenant " + economy.getBalance(player));
-                }
-                else {
-                    player.sendMessage("Vous n'avez pas suffisamment de place dans votre inventaire, libérez-en!");
-                }
+                player.getInventory().addItem(new ItemStack(material));
+                economy.withdrawPlayer(player, amount);
+                player.sendMessage("Tu as maintenant " + economy.getBalance(player));
             }
             else{
                 player.sendMessage("Vous n'avez pas assez pour effectuer cette transaction");
@@ -98,46 +88,15 @@ public class Managers {
         }
     }
 
-    public void givemoney (Player player,int amount){
-        if (checkHasNumber(player,amount)){
-            if (amount == 100){
-                player.getInventory().removeItem(new ItemStack(Material.DIRT,64),new ItemStack(Material.DIRT,36));
-            }
-            else {
-                player.getInventory().removeItem(new ItemStack(Material.DIRT,amount));
-            }
-            economy.depositPlayer(player,amount);
-            player.sendMessage("Tu as maintenant "+ economy.getBalance(player));
-        }
-        else{
-            player.sendMessage("Vous n'avez pas assez pour effectuer cette transaction");
-        }
-    }
-
-    public boolean checkHasNumber (Player player,int amount){
-        if(setupEconomy()) {
-            int number = 0;
-            for (ItemStack i : player.getInventory().getContents()) {
-                if (!i.getType().equals(Material.AIR) && i.getType().equals(Material.DIRT)) {
-                    number += i.getAmount();
-                }
-            }
-            return number >= amount;
-        }
-        return false;
-    }
-
-    public boolean checkHasStackFree(Player player, int amount){
-        ItemStack[] items= player.getInventory().getContents();
-        int invamount = 0;
-        for (ItemStack item : items){
-            if (item.getType()==Material.DIRT && item.getAmount()!=64){
-                invamount+= 64-item.getAmount();
-            }
-            else if(item.getType()==Material.AIR){
-                invamount+=64;
+    public void givemoney (Player player,int amount, Material material){
+        if (setupEconomy()) {
+            if (player.getInventory().contains(material)) {
+                player.getInventory().removeItem(new ItemStack(material));
+                economy.depositPlayer(player, amount);
+                player.sendMessage("Tu as maintenant " + economy.getBalance(player));
+            } else {
+                player.sendMessage("Vous n'avez pas assez pour effectuer cette transaction");
             }
         }
-        return invamount>=amount;
     }
 }

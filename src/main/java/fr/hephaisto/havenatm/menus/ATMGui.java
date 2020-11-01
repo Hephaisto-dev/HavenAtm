@@ -24,11 +24,9 @@ public class ATMGui implements GuiBuilder {
     public void contents(Player player, Inventory inv) {
         ItemStack deposer = new ItemBuilder(Material.CHEST).setName("§aDéposer de l'argent").toItemStack();
         ItemStack retirer = new ItemBuilder(Material.CHEST).setName("§aRetirer de l'argent").toItemStack();
-        ItemStack details = new ItemBuilder(Material.BOOK).setName("§aDétails").setLore("§9Vous avez&7: &6 "+ Managers.getManagers().getEcon().getBalance(player) +" billets").toItemStack();
-        inv.setItem(2,deposer);
-        inv.setItem(4,retirer);
-        inv.setItem(6,details);
-    }
+        inv.setItem(3,deposer);
+        inv.setItem(5,retirer);
+        }
 
     @Override
     public void onClick(Player player, InventoryView inv, ItemStack current, int slot) {
