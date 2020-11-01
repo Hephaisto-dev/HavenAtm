@@ -24,6 +24,8 @@ public class ATMGui implements GuiBuilder {
     public void contents(Player player, Inventory inv) {
         ItemStack deposer = new ItemBuilder(Material.CHEST).setName("§aDéposer de l'argent").toItemStack();
         ItemStack retirer = new ItemBuilder(Material.CHEST).setName("§aRetirer de l'argent").toItemStack();
+        ItemStack tout = new ItemBuilder(Material.BARRIER).setName("§aTout déposer").toItemStack();
+        inv.setItem(2,tout);
         inv.setItem(3,deposer);
         inv.setItem(5,retirer);
         }
@@ -35,6 +37,9 @@ public class ATMGui implements GuiBuilder {
         }
         if (current.getItemMeta().getDisplayName().equals("§aRetirer de l'argent") && current.getType() == Material.CHEST){
             Managers.getManagers().getGuiManager().open(player, RetirerGUI.class);
+        }
+        if (current.getItemMeta().getDisplayName().equals("§aTout déposer") && current.getType() == Material.BARRIER){
+            Managers.getManagers().deposertout(player);
         }
     }
 }
