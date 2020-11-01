@@ -16,6 +16,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.ServicePriority;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Managers {
@@ -77,14 +78,19 @@ public class Managers {
     public void takemoney (Player player, int amount){
         if (setupEconomy()) {
             if (economy.getBalance(player)>amount) {
-                if (amount == 100) {
-                    player.getInventory().addItem(new ItemStack(Material.DIRT, 64));
-                    player.getInventory().addItem(new ItemStack(Material.DIRT, 36));
-                } else {
-                    player.getInventory().addItem(new ItemStack(Material.DIRT, amount));
+                if (checkHasStackFree(player,amount)) {
+                    if (amount == 100) {
+                        player.getInventory().addItem(new ItemStack(Material.DIRT, 64));
+                        player.getInventory().addItem(new ItemStack(Material.DIRT, 36));
+                    } else {
+                        player.getInventory().addItem(new ItemStack(Material.DIRT, amount));
+                    }
+                    economy.withdrawPlayer(player, amount);
+                    player.sendMessage("Tu as maintenant " + economy.getBalance(player));
                 }
-                economy.withdrawPlayer(player, amount);
-                player.sendMessage("Tu as maintenant " + economy.getBalance(player));
+                else {
+                    player.sendMessage("Vous n'avez pas suffisamment de place dans votre inventaire, libérez-en!");
+                }
             }
             else{
                 player.sendMessage("Vous n'avez pas assez pour effectuer cette transaction");
@@ -119,5 +125,19 @@ public class Managers {
             return number >= amount;
         }
         return false;
+    }
+
+    public boolean checkHasStackFree(Player player, int amount){
+        ItemStack[] items= player.getInventory().getContents();
+        int invamount = 0;
+        for (ItemStack item : items){
+            if (item.getType()==Material.DIRT && item.getAmount()!=64){
+                invamount+= 64-item.getAmount();
+            }
+            else if(item.getType()==Material.AIR){
+                invamount+=64;
+            }
+        }
+        return invamount>=amount;
     }
 }
