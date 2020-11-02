@@ -102,7 +102,7 @@ public class Managers {
 
     public void deposertout(Player player){
         if (setupEconomy()){
-            Material[] materials = {Material.DIRT,Material.STONE,Material.DIORITE,Material.COBBLESTONE,Material.OBSIDIAN};
+            Material[] materials = {Material.ORANGE_DYE,Material.GREEN_DYE,Material.BROWN_DYE,Material.PURPLE_DYE,Material.CYAN_DYE,Material.YELLOW_DYE};
             if (player.getInventory().contains(materials[0]) || player.getInventory().contains(materials[1]) ||player.getInventory().contains(materials[2]) ||player.getInventory().contains(materials[3]) ||player.getInventory().contains(materials[4])) {
                 for (ItemStack stack : player.getInventory().getContents()) {
                     for (Material material : materials) {
@@ -110,20 +110,23 @@ public class Managers {
                             continue;
                         }
                         else if (stack.getType() == material) {
-                            if (material == Material.DIRT) {
-                                givemoney(player, 1, material, stack.getAmount());
-                            }
-                            if (material == Material.STONE) {
+                            if (material == Material.ORANGE_DYE) {
                                 givemoney(player, 5, material, stack.getAmount());
                             }
-                            if (material == Material.DIORITE) {
+                            if (material == Material.GREEN_DYE) {
                                 givemoney(player, 10, material, stack.getAmount());
                             }
-                            if (material == Material.COBBLESTONE) {
+                            if (material == Material.BROWN_DYE) {
+                                givemoney(player, 20, material, stack.getAmount());
+                            }
+                            if (material == Material.PURPLE_DYE) {
                                 givemoney(player, 50, material, stack.getAmount());
                             }
-                            if (material == Material.OBSIDIAN) {
+                            if (material == Material.CYAN_DYE) {
                                 givemoney(player, 100, material, stack.getAmount());
+                            }
+                            if (material == Material.YELLOW_DYE) {
+                                givemoney(player, 500, material, stack.getAmount());
                             }
                         }
                     }
