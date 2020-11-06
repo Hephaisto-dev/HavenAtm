@@ -30,24 +30,24 @@ public class DeposerGUI implements GuiBuilder {
     @Override
     public void contents(Player player, Inventory inv) {
         inv.setItem(0,un);
-        inv.setItem(2,cinq);
-        inv.setItem(4,dix);
-        inv.setItem(6,cinquante);
-        inv.setItem(8,cent);
-        inv.setItem(9,cinquecent);
+        inv.setItem(1,cinq);
+        inv.setItem(3,dix);
+        inv.setItem(5,cinquante);
+        inv.setItem(7,cent);
+        inv.setItem(8,cinquecent);
     }
 
     @Override
     public void onClick(Player player, InventoryView inv, ItemStack current, int slot) {
         Managers m = Managers.getManagers();
         if (current.getItemMeta().getDisplayName().equals("§a5") && current.getType() == Material.ORANGE_DYE){
-            m.givemoney(player,1,Material.ORANGE_DYE);
+            m.givemoney(player,5,Material.ORANGE_DYE);
         }
         if (current.getItemMeta().getDisplayName().equals("§a10") && current.getType() == Material.GREEN_DYE){
-            m.givemoney(player,5,Material.GREEN_DYE);
+            m.givemoney(player,10,Material.GREEN_DYE);
         }
         if (current.getItemMeta().getDisplayName().equals("§a20") && current.getType() == Material.BROWN_DYE){
-            m.givemoney(player,10,Material.BROWN_DYE);
+            m.givemoney(player,20,Material.BROWN_DYE);
         }
         if (current.getItemMeta().getDisplayName().equals("§a50") && current.getType() == Material.PURPLE_DYE){
             m.givemoney(player,50,Material.PURPLE_DYE);
@@ -56,7 +56,7 @@ public class DeposerGUI implements GuiBuilder {
             m.givemoney(player,100,Material.CYAN_DYE);
         }
         if (current.getItemMeta().getDisplayName().equals("§a500") && current.getType() == Material.YELLOW_DYE){
-            m.givemoney(player,100,Material.YELLOW_DYE);
+            m.givemoney(player,500,Material.YELLOW_DYE);
         }
     }
 }
